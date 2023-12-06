@@ -1,0 +1,124 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: a2b93fc41e22608fa16a4ffd9731e40730b893cdad837d256405e4b58d86e6f8
+    cni.projectcalico.org/podIP: 10.233.70.6/32
+    cni.projectcalico.org/podIPs: 10.233.70.6/32
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"run":"likhitha"},"name":"likhitha","namespace":"likhitha"},"spec":{"containers":[{"args":["bash"],"image":"registry.ims.bio/likhitha:1.1","imagePullPolicy":"IfNotPresent","name":"likhitha","resources":{"limits":{"nvidia.com/gpu":1}},"stdin":true,"stdinOnce":true,"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","tty":true,"volumeMounts":[{"mountPath":"/data/PANDA","name":"volume-likhitha"}]}],"dnsPolicy":"ClusterFirst","enableServiceLinks":true,"preemptionPolicy":"PreemptLowerPriority","priority":0,"restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"serviceAccount":"default","serviceAccountName":"default","terminationGracePeriodSeconds":30,"volumes":[{"name":"volume-likhitha","persistentVolumeClaim":{"claimName":"pvc-likhitha"}}]}}
+  creationTimestamp: "2023-05-26T12:31:08Z"
+  labels:
+    run: likhitha
+  name: likhitha
+  namespace: likhitha
+  resourceVersion: "39633"
+  uid: d999b617-4671-4d44-bdba-d2dfd5f22de9
+spec:
+  containers:
+  - args:
+    - bash
+    image: registry.ims.bio/likhitha:1.2
+    imagePullPolicy: IfNotPresent
+    name: likhitha
+    resources:
+      limits:
+        nvidia.com/gpu: "1"
+      requests:
+        nvidia.com/gpu: "1"
+    stdin: true
+    stdinOnce: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    tty: true
+    volumeMounts:
+    - mountPath: /data/PANDA
+      name: volume-likhitha
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-5rcff
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: deltabonn-5
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: volume-likhitha
+    persistentVolumeClaim:
+      claimName: pvc-likhitha
+  - name: kube-api-access-5rcff
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-26T12:31:08Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-26T15:15:49Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-26T15:15:49Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-26T12:31:08Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://0d4e9c26e73ac2e7ae8e37307d1a1238a2281d53b3bf9e77fa068443f46dc113
+    image: registry.ims.bio/likhitha:1.1
+    imageID: registry.ims.bio/likhitha@sha256:c3421fa7191d3d168a2aee7ce79c5597f9fa4b3bc2025aefb436091c714d49fd
+    lastState:
+      terminated:
+        containerID: containerd://12bf93649aed2ba3544c4f6e2aee4c674ed75e5970605a6701be35b197f7c171
+        exitCode: 255
+        finishedAt: "2023-05-26T15:15:23Z"
+        reason: Unknown
+        startedAt: "2023-05-26T13:52:46Z"
+    name: likhitha
+    ready: true
+    restartCount: 3
+    started: true
+    state:
+      running:
+        startedAt: "2023-05-26T15:15:49Z"
+  hostIP: 172.22.68.37
+  phase: Running
+  podIP: 10.233.70.6
+  podIPs:
+  - ip: 10.233.70.6
+  qosClass: BestEffort
+  startTime: "2023-05-26T12:31:08Z"
