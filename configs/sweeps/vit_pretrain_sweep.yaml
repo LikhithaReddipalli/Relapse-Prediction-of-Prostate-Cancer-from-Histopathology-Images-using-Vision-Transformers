@@ -1,0 +1,12 @@
+program: /data/code/survival_prediction/run.py
+method: grid
+name: panda_pretrain_vit
+#project: sweeps
+metric:
+  goal: maximize
+  name: val/roc_auc
+parameters:
+  lr:
+    values: [1e-6, 3e-6, 1e-5, 3e-5, 1e-4, 3e-4, 1e-3, 3e-3]
+  weight_decay:
+    values: [0.3, 0.4, 0.5]
