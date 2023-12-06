@@ -1,0 +1,7 @@
+build-essential
+openslide-tools
+python3-openslide
+git
+libgl1
+nano
+vim
